@@ -1,25 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+  Navigate,
+} from 'react-router-dom';
+import MainFrame from './components/MainFrame';
+import Models from './pages/models/Models';
+import Drawings from './pages/drawings/Drawings';
+import Services from './pages/services/Services';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<MainFrame />}>
+      <Route path="/models" element={<Models />} />
+      <Route path="/drawings" element={<Drawings />} />
+      <Route path="/services" element={<Services />} />
+      <Route path="*" element={<Navigate to="/models" />} />
+    </Route>,
+  ),
+);
+
+function Fallback() {
+  return <p>Performing initial data load</p>;
+}
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <RouterProvider router={router} fallbackElement={Fallback} />;
+}
+
+if (import.meta.hot) {
+  import.meta.hot.dispose(() => router.dispose());
 }
 
 export default App;
