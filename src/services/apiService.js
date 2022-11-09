@@ -8,7 +8,7 @@ export default function apiService({ menthod, url, data = {}, option = {} }) {
       'Access-Control-Allow-Headers':
         'Origin, X-Requested-With, Content-Type, Accept',
     },
-    baseURL: 'http://localhost:3000',
+    baseURL: process.env.REACT_APP_BACKEND_URL,
   });
   instance.interceptors.response.use(
     (response) => response,

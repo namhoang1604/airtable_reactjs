@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  reactjs: 
+    env_file: "./.env"
+    restart: always
+    build: 
+      context: ./
+      dockerfile: ./Dockerfile
+    image: namhoang1604/reactjs-assignment:0.1-2022.11.08
+    ports:
+      - "80:80"
+      - "443:443"
