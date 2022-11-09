@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Menu } from 'antd';
 
 const items = [
-  { key: '1', label: 'Models', path: '/models' },
+  { key: '1', label: 'Models', path: '/' },
   { key: '2', label: 'Drawings', path: '/drawings' },
   {
     key: '3',
@@ -16,7 +16,7 @@ function MenuBar() {
   const location = useLocation();
   const navigate = useNavigate();
   const [selectedKey, setSelectedKey] = useState(
-    items.find((_item) => location.pathname.startsWith(_item.path)).key,
+    (items.find((item) => location.pathname.startsWith(item.path)) || {}).key,
   );
 
   const onClickMenu = (item) => {
@@ -26,7 +26,7 @@ function MenuBar() {
 
   useEffect(() => {
     setSelectedKey(
-      items.find((_item) => location.pathname.startsWith(_item.path)).key,
+      (items.find((item) => location.pathname.startsWith(item.path)) || {}).key,
     );
   }, [location]);
 

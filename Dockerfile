@@ -1,5 +1,5 @@
 # Base image
-FROM node:16-alpine as build
+FROM --platform=linux/amd64 node:16-alpine as build
 
 RUN apk update; apk add curl
 RUN apk add g++ make py3-pip
